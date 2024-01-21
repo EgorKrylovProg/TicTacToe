@@ -32,6 +32,11 @@ public class GameTicTacToe {
                 i = 2;
                 j = numCell - 7;
             }
+            default -> {
+                System.out.println("Такой клетки нет!");
+                numCell = -1;
+                return;
+            }
         }
 
         if (gameField[i][j] == ' ') {
