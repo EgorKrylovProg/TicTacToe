@@ -5,7 +5,7 @@ public class GameTicTacToe {
     static final char O = 'O';
     static final char X = 'X';
     static int numCell = -1;
-    static int draw = 0;
+    static int numMove = 0;
     static char[][] gameField = {
             {' ', ' ', ' '},
             {' ', ' ', ' '},
@@ -22,8 +22,12 @@ public class GameTicTacToe {
     }
 
     static void move(char symbol) {
-        int i = 0, j = numCell - 1;
+        int i, j;
         switch (numCell) {
+            case 1, 2, 3 -> {
+                i = 0;
+                j = numCell - 1;
+            }
             case 4, 5, 6 -> {
                 i = 1;
                 j = numCell - 4;
@@ -41,7 +45,7 @@ public class GameTicTacToe {
 
         if (gameField[i][j] == ' ') {
             gameField[i][j] = symbol;
-            draw++;
+            numMove++;
         }
         else {
             System.out.println("Эта клетка уже занята! Выберите другую.");
@@ -67,7 +71,7 @@ public class GameTicTacToe {
             if (numSymbol == 3) {
                 printField();
                 System.out.printf("Побеждает игрок, который играл за %s!", currentSymbol == X ? "крестик" : "нолик");
-                draw = -1;
+                numMove = -1;
                 return false;
             }
         }
@@ -85,7 +89,7 @@ public class GameTicTacToe {
             if (numSymbol == 3) {
                 printField();
                 System.out.printf("Побеждает игрок, который играл за %s!", currentSymbol == X ? "крестик" : "нолик");
-                draw = -1;
+                numMove = -1;
                 return false;
             }
         }
@@ -106,7 +110,7 @@ public class GameTicTacToe {
                 if (numSymbol == 3) {
                     printField();
                     System.out.printf("Побеждает игрок, который играл за %s!", currentSymbol == X ? "крестик" : "нолик");
-                    draw = -1;
+                    numMove = -1;
                     return false;
                 }
                 break;
@@ -127,7 +131,7 @@ public class GameTicTacToe {
                 if (numSymbol == 3) {
                     printField();
                     System.out.printf("Побеждает игрок, который играл за %s!", currentSymbol == X ? "крестик" : "нолик");
-                    draw = -1;
+                    numMove = -1;
                     return false;
                 }
             }
@@ -172,7 +176,7 @@ public class GameTicTacToe {
         }
 
         boolean flag = true;
-        while (flag && draw < 9) {
+        while (flag && numMove < 9) {
             System.out.printf("Сейчас ходит: %s\n", symbol == O ? "Нолик" : "Крестик");
             printField();
 
@@ -196,7 +200,7 @@ public class GameTicTacToe {
 
             symbol = symbol == O ? X : O;
         }
-        if (draw == 9) {
+        if (numMove == 9) {
             printField();
             System.out.println("Ничья! Стоит сыграть еще раз!)");
         }
